@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://xa0uvgcc2c32"]
+
+[ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="1_ci02h"]
+[ext_resource type="Script" path="res://scene/enemy.gd" id="1_n4ubt"]
+[ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_rsun5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aymph"]
+size = Vector2(8, 8)
+
+[node name="Enemy" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_n4ubt")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_rsun5")]
+health = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jx351")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_ci02h")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_aymph")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://sghxkybj6451"]
+
+[ext_resource type="Script" path="res://scene/sword.gd" id="1_4cb7p"]
+[ext_resource type="Texture2D" uid="uid://cuucyshuhn1gc" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0070.png" id="1_b7qww"]
+[ext_resource type="Script" path="res://scene/Hitbox.gd" id="2_qgmtv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55ta7"]
+size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_2bi0d"]
+resource_name = "Swing"
+length = 0.2
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o1lbm"]
+_data = {
+"Swing": SubResource("Animation_2bi0d")
+}
+
+[node name="Sword" type="Node2D"]
+script = ExtResource("1_4cb7p")
+
+[node name="SwordSprite" type="Sprite2D" parent="."]
+position = Vector2(4, -4)
+texture = ExtResource("1_b7qww")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("2_qgmtv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4, -4)
+shape = SubResource("RectangleShape2D_55ta7")
+debug_color = Color(1, 0.0941176, 0, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o1lbm")
+}
