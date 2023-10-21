@@ -38,6 +38,9 @@ func _physics_process(delta: float) -> void:
 
 	arrive_to(target_position)
 
+func detach_camera():
+	_anchor_position = Vector2.ZERO
+	_target_zoom = player_zoom
 
 # Entering in an `Anchor2D` we receive the anchor object and change our `_anchor_position` and
 # `_target_zoom`
@@ -50,7 +53,6 @@ func _on_AnchorDetector2D_anchor_detected(anchor: Anchor2D) -> void:
 func _on_AnchorDetector2D_anchor_detached() -> void:
 	_anchor_position = Vector2.ZERO
 	_target_zoom = player_zoom
-
 
 # Smoothly update the zoom level using a linear interpolation.
 func update_zoom() -> void:

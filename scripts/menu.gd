@@ -18,3 +18,7 @@ func _on_button_pressed():
 
 func _on_area_2d_area_entered(area):
 	print("Aïe")
+
+
+func _on_button_2_pressed():
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

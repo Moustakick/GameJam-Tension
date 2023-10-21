@@ -12,5 +12,7 @@ monitoring = false
 script = ExtResource("1_015mk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_ei8m5")
+disabled = true
 debug_color = Color(0.627451, 0.529412, 0, 0.419608)

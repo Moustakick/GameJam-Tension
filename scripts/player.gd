@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export var SPEED = 300.0
@@ -8,12 +9,14 @@ extends CharacterBody2D
 @onready var sword_marker_key = $CenterMarkerKey/SwordMarkerKey
 @onready var center_marker_mouse = $CenterMarkerMouse
 @onready var sword_marker_mouse = $CenterMarkerMouse/SwordMarkerMouse
+@onready var anchor_camera = $AnchorCamera2D
 
 var sw
 var is_sw_key = false
 var is_sw_mouse = false
 var direction
 var last_rotation = 0
+var first_movement = false
 
 func get_input():
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -34,6 +37,12 @@ func get_input():
 	center_marker_mouse.rotate(mouse_direction.angle())
 	
 	velocity = direction * SPEED
+	
+	# First movement
+	if velocity != Vector2(0,0) and first_movement == false:
+		first_movement = true
+		print("moved")
+		anchor_camera.detach_camera()
 
 func _input(event):
 	# attack with key board

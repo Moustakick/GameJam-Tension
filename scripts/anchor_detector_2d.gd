@@ -10,7 +10,6 @@ signal anchor_detached
 func _ready():
 	pass # Replace with function body.
 
-
 func _on_area_entered(area: Anchor2D) -> void:
 	emit_signal("anchor_detected", area)
 
