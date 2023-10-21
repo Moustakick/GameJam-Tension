@@ -1,8 +1,10 @@
-extends RigidBody2D
+extends CharacterBody2D
 
 class_name Enemy
 
 @onready var health = $HealthComponent as HealthComponent
+
+var SPEED = 300.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

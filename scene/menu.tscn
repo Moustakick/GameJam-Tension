@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_qecsi"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="2_pqt2h"]
-[ext_resource type="PackedScene" uid="uid://hag24t10sqiu" path="res://scene/anchor_2d.tscn" id="3_3p8tf"]
+[ext_resource type="PackedScene" path="res://scene/anchor_2d.tscn" id="3_3p8tf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h20ro"]
 

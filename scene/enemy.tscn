@@ -1,14 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://xa0uvgcc2c32"]
+[gd_scene load_steps=8 format=3 uid="uid://xa0uvgcc2c32"]
 
 [ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="1_ci02h"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_n4ubt"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_rsun5"]
+[ext_resource type="Script" path="res://scene/AI.gd" id="4_1fl0t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aymph"]
 size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
+radius = 44.4072
 
 [node name="Enemy" type="RigidBody2D"]
 gravity_scale = 0.0
@@ -29,4 +33,14 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_aymph")
 
+[node name="AI" type="Node2D" parent="."]
+script = ExtResource("4_1fl0t")
+
+[node name="EnemyDetectionZone" type="Area2D" parent="AI"]
+
+[node name="EnemyDetectionZoneShape" type="CollisionShape2D" parent="AI/EnemyDetectionZone"]
+shape = SubResource("CircleShape2D_vt714")
+one_way_collision_margin = 0.0
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="AI/EnemyDetectionZone" to="AI" method="_on_enemy_detection_zone_body_entered"]
