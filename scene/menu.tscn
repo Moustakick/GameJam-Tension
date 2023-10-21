@@ -1,53 +1,39 @@
-[gd_scene load_steps=6 format=3 uid="uid://cb2tow7m4qk7r"]
+[gd_scene load_steps=5 format=3 uid="uid://cb2tow7m4qk7r"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_qecsi"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="2_pqt2h"]
 [ext_resource type="PackedScene" path="res://scene/anchor_2d.tscn" id="3_3p8tf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h20ro"]
-
-[sub_resource type="GDScript" id="GDScript_3glyg"]
-script/source = "extends CollisionShape2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtf6i"]
+size = Vector2(586, 333)
 
 [node name="Menu" type="Node2D"]
 script = ExtResource("1_qecsi")
 
-[node name="Button" type="Button" parent="."]
-offset_left = 141.0
-offset_top = 101.0
-offset_right = 501.0
-offset_bottom = 293.0
-text = "Test Level"
-
-[node name="Player" parent="." instance=ExtResource("2_pqt2h")]
-position = Vector2(42, 23)
-
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(77, 23)
-shape = SubResource("RectangleShape2D_h20ro")
-script = SubResource("GDScript_3glyg")
-
-[node name="Polygon2D" type="Polygon2D" parent="Area2D"]
-polygon = PackedVector2Array(67, 13, 67, 33, 87, 33, 87, 13)
-
 [node name="Anchor2D" parent="." instance=ExtResource("3_3p8tf")]
-position = Vector2(248, -25)
+position = Vector2(277, 152)
 zoom_level = 2
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Anchor2D"]
+position = Vector2(15, 13)
+shape = SubResource("RectangleShape2D_wtf6i")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 39.0
+offset_top = 102.0
+offset_right = 190.0
+offset_bottom = 168.0
+text = "Test Level"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 44.0
+offset_top = 21.0
+offset_right = 195.0
+offset_bottom = 87.0
+text = "FullScreen"
+
+[node name="Player" parent="." instance=ExtResource("2_pqt2h")]
+position = Vector2(10, 9)
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
