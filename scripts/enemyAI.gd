@@ -19,9 +19,9 @@ func set_state(new_state):
 	if new_state != state:
 		state = new_state
 		if new_state == State.PANIC:
-			enemy.SPEED *= 2
+			enemy.SPEED *= 3
 		else:
-			enemy.SPEED /= 2
+			enemy.SPEED /= 3
 		emit_signal("state_changed", state)
 
 # Called when the node enters the scene tree for the first time.
