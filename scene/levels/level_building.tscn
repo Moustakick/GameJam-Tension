@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5gewnm4annag"]
+[gd_scene load_steps=6 format=3 uid="uid://beg7mcst6c4si"]
 
 [ext_resource type="Texture2D" uid="uid://bqdsvq3hfvl6m" path="res://kenney_micro-roguelike/Tilemap/monochrome_tilemap.png" id="1_3va1k"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="2_m1yj6"]

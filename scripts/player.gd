@@ -1,7 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
-@export var SPEED = 300.0
+var FRICTION = 0.4
+var SPEED = 100.0
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -29,8 +30,19 @@ func _ready():
 	var count_down = "%01d.%02d" % [secs, mils]
 	timer_label.text = count_down
 
-func get_input():
-	direction = Input.get_vector("left", "right", "up", "down")
+func get_movement_input():
+	var direction := Vector2(
+		# This first line calculates the X direction, the vector's first component.
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		# And here, we calculate the Y direction. Note that the Y-axis points 
+		# DOWN in games.
+		# That is to say, a Y value of `1.0` points downward.
+		Input.get_action_strength("down") - Input.get_action_strength("up")
+	)
+	if direction.length() > 1.0:
+		direction = direction.normalized()
+
+
 	var mouse_pos = get_viewport().get_mouse_position()
 	var global_pos = get_global_transform_with_canvas().get_origin()
 	
@@ -47,7 +59,10 @@ func get_input():
 	center_marker_mouse.rotation = 0
 	center_marker_mouse.rotate(mouse_direction.angle())
 	
-	velocity = direction * SPEED
+	# Smooth steering
+	var target_velocity = direction * SPEED
+	velocity += (target_velocity - velocity) * FRICTION
+	move_and_slide()
 	
 	# First movement
 	if  first_movement == false and velocity != Vector2(0,0):
@@ -81,8 +96,7 @@ func _unhandled_input(event):
 		get_tree().quit()
 
 func _physics_process(delta):
-	get_input()
-	move_and_slide()
+	get_movement_input()
 	
 	if not death_timer.is_stopped():
 		time_left -= delta
