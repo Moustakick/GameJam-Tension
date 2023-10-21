@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://prj5bvchymvy"]
 
 [ext_resource type="Texture2D" uid="uid://sxtghssh48u5" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0129.png" id="1_6qv42"]
-[ext_resource type="Script" path="res://scene/blood.gd" id="1_81cb2"]
+[ext_resource type="Script" path="res://scripts/blood.gd" id="1_81cb2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nojfj"]
 size = Vector2(8, 8)

@@ -15,7 +15,6 @@ gravity_scale = 0.0
 script = ExtResource("1_n4ubt")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_rsun5")]
-health = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jx351")
