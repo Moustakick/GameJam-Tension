@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 var FRICTION = 0.4
 var SPEED = 100.0
+var DASH_SPEED = 2000.0
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -70,6 +71,11 @@ func get_movement_input():
 		anchor_camera.detach_camera()
 		death_timer.start()
 
+func dash():
+	velocity = Vector2.RIGHT.rotated(last_rotation) * DASH_SPEED
+	print("zoom")	
+	pass
+
 func _input(event):
 	# attack with key board
 	if not is_sw_mouse:
@@ -94,6 +100,8 @@ func _input(event):
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+	if event.is_action_pressed("dash"):
+		dash()
 
 func _physics_process(delta):
 	get_movement_input()

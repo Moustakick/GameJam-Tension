@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://0p33upfukr26"]
 
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="2_2am05"]
-[ext_resource type="PackedScene" uid="uid://hcok2ripdp8k" path="res://scene/levels/tile_map.tscn" id="3_m4nfb"]
+[ext_resource type="PackedScene" path="res://scene/levels/tile_map.tscn" id="3_m4nfb"]
 [ext_resource type="PackedScene" uid="uid://xa0uvgcc2c32" path="res://scene/enemy.tscn" id="3_sgk4a"]
 
 [node name="LevelTest" type="Node2D"]
