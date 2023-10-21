@@ -1,12 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dax2x8onk7n16"]
+[gd_scene load_steps=8 format=3 uid="uid://dax2x8onk7n16"]
 
-[ext_resource type="Script" path="res://scene/player.gd" id="1_406lb"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_406lb"]
 [ext_resource type="Texture2D" uid="uid://bwr7upym8yf3s" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0004.png" id="1_s8q7j"]
-[ext_resource type="Script" path="res://scene/Hurtbox.gd" id="3_y64kw"]
+[ext_resource type="Script" path="res://scripts/Hurtbox.gd" id="3_y64kw"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="4_q6ny3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bn8g"]
 size = Vector2(6, 6)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_87raf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofb1s"]
 size = Vector2(8, 8)
@@ -19,6 +21,7 @@ SPEED = 100.0
 shape = SubResource("RectangleShape2D_8bn8g")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_87raf")
 texture = ExtResource("1_s8q7j")
 
 [node name="Hurtbox" type="Area2D" parent="."]

@@ -1,15 +1,12 @@
-extends RigidBody2D
+extends Node2D
 
-@onready var health = $HealthComponent as HealthComponent
+@onready var animation_player = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	animation_player.play("Swing")
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-func _on_hurtbox_area_entered(hitbox : HitBox):
-	health.take_damage(hitbox.get_damage())

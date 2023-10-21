@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://prj5bvchymvy"]
+
+[ext_resource type="Texture2D" uid="uid://sxtghssh48u5" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0129.png" id="1_6qv42"]
+[ext_resource type="Script" path="res://scene/blood.gd" id="1_81cb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nojfj"]
+size = Vector2(8, 8)
+
+[node name="Blood" type="Node2D"]
+script = ExtResource("1_81cb2")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+shape = SubResource("RectangleShape2D_nojfj")
+one_way_collision_margin = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6qv42")

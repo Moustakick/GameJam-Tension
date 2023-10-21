@@ -13,20 +13,15 @@ var last_rotation = 0;
 
 func get_input():
 	direction = Input.get_vector("left", "right", "up", "down")
-	if(direction == Vector2(0,0)):
+	
+	if direction == Vector2(0,0):
 		center_marker.rotation = last_rotation
 	else:
 		center_marker.rotation = 0
 		center_marker.rotate(direction.angle())
 		last_rotation = center_marker.rotation
-		print(center_marker.rotation)
 	
-	
-	#print(direction)
 	velocity = direction * SPEED
-
-func vector_to_rotation(vector : Vector2):
-	return vector.angle() * 180/PI
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -45,7 +40,6 @@ func _on_hurtbox_body_entered(body):
 	print(1)
 	health.take_damage(1)
 	pass # Replace with function body.
-
 
 func _on_hurtbox_area_entered(area):
 	print(1)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://xa0uvgcc2c32"]
 
 [ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="1_ci02h"]
-[ext_resource type="Script" path="res://scene/enemy.gd" id="1_n4ubt"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_n4ubt"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_rsun5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
