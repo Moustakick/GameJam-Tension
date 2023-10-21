@@ -10,6 +10,8 @@ extends CharacterBody2D
 @onready var center_marker_mouse = $CenterMarkerMouse
 @onready var sword_marker_mouse = $CenterMarkerMouse/SwordMarkerMouse
 @onready var anchor_camera = $AnchorCamera2D
+@onready var death_timer = $DeathTimer
+@onready var timer_label = $AnchorCamera2D/TimerLabel
 
 var sw
 var is_sw_key = false
@@ -17,6 +19,15 @@ var is_sw_mouse = false
 var direction
 var last_rotation = 0
 var first_movement = false
+var time_left = 0
+
+func _ready():
+	time_left = death_timer.wait_time
+	var mils = fmod(time_left,1)*100
+	var secs = fmod(time_left,60)
+	
+	var count_down = "%01d.%02d" % [secs, mils]
+	timer_label.text = count_down
 
 func get_input():
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -39,10 +50,10 @@ func get_input():
 	velocity = direction * SPEED
 	
 	# First movement
-	if velocity != Vector2(0,0) and first_movement == false:
+	if  first_movement == false and velocity != Vector2(0,0):
 		first_movement = true
-		print("moved")
 		anchor_camera.detach_camera()
+		death_timer.start()
 
 func _input(event):
 	# attack with key board
@@ -72,6 +83,21 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	get_input()
 	move_and_slide()
+	
+	if not death_timer.is_stopped():
+		time_left -= delta
+		if time_left < 0.001:
+			time_left = 0
+			anchor_camera.reparent(get_parent())
+			health.take_damage(100)
+			
+		var mils = fmod(time_left,1)*100
+		var secs = fmod(time_left,60)
+		
+		var count_down = "%01d.%02d" % [secs, mils]
+		
+		timer_label.text = count_down
+		
 
 func _on_hurtbox_body_entered(body):
 	print(1)
@@ -81,4 +107,8 @@ func _on_hurtbox_body_entered(body):
 func _on_hurtbox_area_entered(area):
 	print(1)
 	health.take_damage(1)
+	pass # Replace with function body.
+
+func _on_timer_timeout():
+	print("Boum")
 	pass # Replace with function body.

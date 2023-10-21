@@ -15,6 +15,7 @@ var _velocity = Vector2.ZERO
 # Global position of an anchor area. If it's equal to `Vector2.ZERO`,
 # the camera doesn't have an anchor point and follows its owner.
 var _anchor_position := Vector2.ZERO
+var last_position := Vector2.ZERO
 var _target_zoom := 3.0
 
 
@@ -30,8 +31,14 @@ func _physics_process(delta: float) -> void:
 	# The camera's target position can either be `_anchor_position` if the value isn't
 	# `Vector2.ZERO` or the owner's position. The owner is the root node of the scene in which we
 	# instanced and saved the camera. In our demo, it's the Player.
+	var pos
+	if is_instance_valid(owner):
+		pos = owner.global_position
+	else:
+		pos = global_position
+	
 	var target_position: Vector2 = (
-		owner.global_position
+		pos
 		if _anchor_position.is_equal_approx(Vector2.ZERO)
 		else _anchor_position
 	)
