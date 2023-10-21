@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cb2tow7m4qk7r"]
+[gd_scene load_steps=6 format=3 uid="uid://cb2tow7m4qk7r"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_qecsi"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="2_pqt2h"]
+[ext_resource type="PackedScene" uid="uid://hag24t10sqiu" path="res://scene/anchor_2d.tscn" id="3_3p8tf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h20ro"]
 
@@ -43,6 +44,10 @@ script = SubResource("GDScript_3glyg")
 
 [node name="Polygon2D" type="Polygon2D" parent="Area2D"]
 polygon = PackedVector2Array(67, 13, 67, 33, 87, 33, 87, 13)
+
+[node name="Anchor2D" parent="." instance=ExtResource("3_3p8tf")]
+position = Vector2(248, -25)
+zoom_level = 2
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

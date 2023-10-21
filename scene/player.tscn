@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dax2x8onk7n16"]
+[gd_scene load_steps=10 format=3 uid="uid://dax2x8onk7n16"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_406lb"]
 [ext_resource type="Texture2D" uid="uid://bwr7upym8yf3s" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0004.png" id="1_s8q7j"]
+[ext_resource type="PackedScene" uid="uid://djnykbyn3hpbi" path="res://scene/anchor_camera_2d.tscn" id="2_5x2bm"]
+[ext_resource type="PackedScene" uid="uid://bbwjrdk3jdfry" path="res://scene/anchor_detector_2d.tscn" id="3_ucnoc"]
 [ext_resource type="Script" path="res://scripts/Hurtbox.gd" id="3_y64kw"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="4_q6ny3"]
 
@@ -16,6 +18,10 @@ size = Vector2(8, 8)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_406lb")
 SPEED = 100.0
+
+[node name="AnchorCamera2D" parent="." instance=ExtResource("2_5x2bm")]
+
+[node name="AnchorDetector2D" parent="." instance=ExtResource("3_ucnoc")]
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_8bn8g")
@@ -34,9 +40,6 @@ shape = SubResource("RectangleShape2D_ofb1s")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_q6ny3")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(5, 5)
-
 [node name="CenterMarkerKey" type="Marker2D" parent="."]
 
 [node name="SwordMarkerKey" type="Marker2D" parent="CenterMarkerKey"]
@@ -47,5 +50,7 @@ position = Vector2(4, 0)
 [node name="SwordMarkerMouse" type="Marker2D" parent="CenterMarkerMouse"]
 position = Vector2(4, 0)
 
+[connection signal="anchor_detached" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detached"]
+[connection signal="anchor_detected" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detected"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
