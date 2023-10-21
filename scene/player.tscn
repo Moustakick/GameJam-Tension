@@ -37,9 +37,14 @@ shape = SubResource("RectangleShape2D_ofb1s")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(5, 5)
 
-[node name="CenterMarker" type="Marker2D" parent="."]
+[node name="CenterMarkerKey" type="Marker2D" parent="."]
 
-[node name="SwordMarker" type="Marker2D" parent="CenterMarker"]
+[node name="SwordMarkerKey" type="Marker2D" parent="CenterMarkerKey"]
+position = Vector2(4, 0)
+
+[node name="CenterMarkerMouse" type="Marker2D" parent="."]
+
+[node name="SwordMarkerMouse" type="Marker2D" parent="CenterMarkerMouse"]
 position = Vector2(4, 0)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
