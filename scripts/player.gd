@@ -15,6 +15,7 @@ var TIMER = 3 #sec
 @onready var anchor_camera = $AnchorCamera2D
 @onready var death_timer = $DeathTimer
 @onready var timer_label = $AnchorCamera2D/TimerLabel
+@onready var animation_player = $AnimationPlayer
 
 var sw
 var is_sw_key = false
@@ -52,10 +53,12 @@ func get_movement_input():
 	# update sword position key
 	if direction == Vector2(0,0):
 		center_marker_key.rotation = last_rotation
+		animation_player.play("idle")
 	else:
 		center_marker_key.rotation = 0
 		center_marker_key.rotate(direction.angle())
 		last_rotation = center_marker_key.rotation
+		animation_player.play("move")
 	
 	# update sword position key
 	var mouse_direction = mouse_pos - global_pos
