@@ -5,9 +5,9 @@
 [ext_resource type="Script" path="res://scene/health_component_menu_enemy.gd" id="3_35g4r"]
 [ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="4_l585i"]
 [ext_resource type="Script" path="res://scripts/enemyAI.gd" id="5_wk7xo"]
-[ext_resource type="Texture2D" uid="uid://cl6pf0a25ap0g" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_idle_2.png" id="6_32y3y"]
-[ext_resource type="Texture2D" uid="uid://r2lmfeo60vd6" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="7_a1iah"]
-[ext_resource type="Texture2D" uid="uid://djh7yprqwao2g" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_1.png" id="8_lpjpn"]
+[ext_resource type="Texture2D" uid="uid://cxmeul6s35eu4" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_idle_2.png" id="6_32y3y"]
+[ext_resource type="Texture2D" uid="uid://3vytj2bntdp1" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="7_a1iah"]
+[ext_resource type="Texture2D" uid="uid://u7ofhjaehuj" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_1.png" id="8_lpjpn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
 size = Vector2(8, 8)
