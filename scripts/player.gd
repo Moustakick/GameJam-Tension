@@ -112,6 +112,8 @@ func get_movement_input():
 		title_label.visible=false
 		debut_sprite.visible = false
 		
+		get_tree().call_group("enemy", "party_begin")
+		
 		if !is_safe:
 			death_timer.start()
 
