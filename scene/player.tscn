@@ -94,6 +94,7 @@ shape = SubResource("RectangleShape2D_8bn8g")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_87raf")
+texture = ExtResource("1_s8q7j")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0

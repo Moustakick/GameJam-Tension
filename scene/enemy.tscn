@@ -1,10 +1,51 @@
-[gd_scene load_steps=9 format=3 uid="uid://xa0uvgcc2c32"]
+[gd_scene load_steps=15 format=3 uid="uid://xa0uvgcc2c32"]
 
 [ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="1_ci02h"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_n4ubt"]
+[ext_resource type="Texture2D" uid="uid://r2lmfeo60vd6" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="2_rj2ep"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_rsun5"]
 [ext_resource type="Script" path="res://scene/health_component_enemy.gd" id="3_8aan7"]
 [ext_resource type="Script" path="res://scripts/enemyAI.gd" id="4_6mwtk"]
+[ext_resource type="Texture2D" uid="uid://djh7yprqwao2g" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_1.png" id="5_dc023"]
+[ext_resource type="Texture2D" uid="uid://cl6pf0a25ap0g" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_idle_2.png" id="7_ukutj"]
+
+[sub_resource type="Animation" id="Animation_fx74j"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_ci02h"), ExtResource("7_ukutj")]
+}
+
+[sub_resource type="Animation" id="Animation_lvdes"]
+resource_name = "move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_rj2ep"), ExtResource("5_dc023")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyuw8"]
+_data = {
+"idle": SubResource("Animation_fx74j"),
+"move": SubResource("Animation_lvdes")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
 size = Vector2(8, 8)
@@ -18,14 +59,19 @@ radius = 44.4072
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_n4ubt")
 
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_rj2ep")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gyuw8")
+}
+
 [node name="HealthComponent" parent="." instance=ExtResource("2_rsun5")]
 script = ExtResource("3_8aan7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jx351")
-
-[node name="EnemySprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_ci02h")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
