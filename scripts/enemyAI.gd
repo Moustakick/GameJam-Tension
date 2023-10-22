@@ -23,31 +23,32 @@ func set_state(new_state):
 		state = new_state
 		
 		if new_state == State.PANIC:
-			enemy.SPEED *= 3
+			enemy.speed = enemy.PANIC_SPEED
 		else:
-			enemy.SPEED /= 3
+			enemy.speed = enemy.NORMAL_SPEED
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	enemy = get_parent()
 	move_timer.start()
+	_on_random_move_timer_timeout()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	match state:
 		State.WALK_ARROUND:
 			if is_walking:
-				enemy.velocity = direction * enemy.SPEED
+				enemy.velocity = direction * enemy.speed
 				enemy.move_and_slide()
 			pass
 		State.ESCAPE:
-			enemy.velocity = direction * enemy.SPEED
+			enemy.velocity = direction * enemy.speed
 			enemy.move_and_slide()
 			pass
 		State.PANIC:
 			if player != null:
 				direction = (enemy.position - player.position).normalized()
-				enemy.velocity = direction * enemy.SPEED
+				enemy.velocity = direction * enemy.speed
 				enemy.move_and_slide()
 			pass
 
@@ -63,10 +64,12 @@ func _on_enemy_detection_zone_body_exited(body):
 		escape_timer.start()
 
 func _on_escape_timer_timeout():
-	set_state(State.WALK_ARROUND)
+	if state == State.ESCAPE:
+		set_state(State.WALK_ARROUND)
 
 func _on_random_move_timer_timeout():
 	if state == State.WALK_ARROUND:
 		is_walking = !is_walking
 		if is_walking:
-			direction = Vector2(random.randf_range(-1, 1), random.randf_range(-1, 1)).normalized()
+			var dir_angle = random.randf_range(-PI, PI)
+			direction = Vector2(1, 0).rotated(dir_angle)

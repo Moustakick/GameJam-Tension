@@ -15,6 +15,6 @@ func _unhandled_input(event):
 		get_tree().reload_current_scene()
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().change_scene_to_file("res://scene/levels/menu_principal.tscn")
-	if !is_instance_valid(player):
+	elif !is_instance_valid(player):
 		if event is InputEventKey or event is InputEventMouseButton:
 			get_tree().reload_current_scene()

@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dqcs5h8icc5r5"]
+[gd_scene load_steps=9 format=3 uid="uid://cut0kjwkv1akk"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_bth3h"]
 [ext_resource type="PackedScene" uid="uid://hcok2ripdp8k" path="res://scene/levels/tile_map.tscn" id="2_74u4p"]
 [ext_resource type="PackedScene" uid="uid://hag24t10sqiu" path="res://scene/anchor_2d.tscn" id="3_elsaf"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="4_b47ld"]
-[ext_resource type="PackedScene" uid="uid://brgvab2nu42vl" path="res://scene/menu_enemy.tscn" id="5_1htdj"]
+[ext_resource type="PackedScene" uid="uid://dtkl4irg0f4q5" path="res://scene/menu_enemy.tscn" id="5_1htdj"]
 [ext_resource type="Texture2D" uid="uid://ygb18jacdrog" path="res://kenney_micro-roguelike/Tiles/mouse_pixel.png" id="6_rx04x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2v1o"]

@@ -5,7 +5,9 @@ class_name Enemy
 @onready var health = $HealthComponent as HealthComponent
 @onready var ai = $EnemyAI
 
-var SPEED = 15.0
+var NORMAL_SPEED = 15.0
+var PANIC_SPEED = 45.0
+var speed = NORMAL_SPEED
 
 signal enemy_death
 
@@ -19,6 +21,6 @@ func _process(delta):
 
 func _on_hurtbox_area_entered(hitbox : HitBox):
 	health.take_damage(hitbox.get_damage())
-	
+
 func death_signal_activation():
 	emit_signal("enemy_death")
