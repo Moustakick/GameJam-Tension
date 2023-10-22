@@ -84,6 +84,10 @@ func dash():
 		velocity = Vector2.RIGHT.rotated(last_rotation) * DASH_SPEED
 		dash_cpt -= 1
 		dash_label.text = "dash : %01d" % [dash_cpt]
+		if dash_cpt<1:
+			dash_label.add_theme_color_override("font_color", Color(1,0,0))
+		else:
+			dash_label.add_theme_color_override("font_color", Color(1,1,1))
 
 func _input(event):
 	# attack with key board
@@ -143,3 +147,6 @@ func enemy_died():
 	if dash_cpt<3:
 		dash_cpt += 1
 		dash_label.text = "dash : %01d" % [dash_cpt]
+		dash_label.add_theme_color_override("font_color", Color(1,1,1))
+	elif dash_cpt==3:
+		dash_label.add_theme_color_override("font_color", Color(1,0,0))
