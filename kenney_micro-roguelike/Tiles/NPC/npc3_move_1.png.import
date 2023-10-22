@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
+uid="uid://cyntk8vikm7ka"
+=======
 uid="uid://dp4job7easr3j"
+>>>>>>> 44b4e2152696c37e178f6271df98272a37ada854
 path="res://.godot/imported/npc3_move_1.png-abf1626888ea451ca3bdb572eb94937d.ctex"
 metadata={
 "vram_texture": false
