@@ -1,0 +1,104 @@
+[gd_scene load_steps=16 format=3 uid="uid://bp4psrpe0w2t6"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_j7d73"]
+[ext_resource type="Texture2D" uid="uid://3vytj2bntdp1" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="2_mlfe0"]
+[ext_resource type="Texture2D" uid="uid://dy6v7ynss7dkt" path="res://kenney_micro-roguelike/Tiles/NPC/npc4_idle_1.png" id="3_i6men"]
+[ext_resource type="Texture2D" uid="uid://c64xh0tqiblga" path="res://kenney_micro-roguelike/Tiles/NPC/npc4_idle_2.png" id="4_l0j6g"]
+[ext_resource type="Texture2D" uid="uid://4w2htnxeqv5l" path="res://kenney_micro-roguelike/Tiles/NPC/npc4_move_1.png" id="5_yup4y"]
+[ext_resource type="Texture2D" uid="uid://2vwk6pi6td7k" path="res://kenney_micro-roguelike/Tiles/NPC/npc4_move_2.png" id="6_6yv36"]
+[ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="7_0x0xk"]
+[ext_resource type="Script" path="res://scene/health_component_enemy.gd" id="8_fqqdb"]
+[ext_resource type="Script" path="res://scripts/enemyAI.gd" id="9_17o3y"]
+
+[sub_resource type="Animation" id="Animation_fx74j"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_i6men"), ExtResource("4_l0j6g")]
+}
+
+[sub_resource type="Animation" id="Animation_lvdes"]
+resource_name = "move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemySprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("5_yup4y"), ExtResource("6_6yv36")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gyuw8"]
+_data = {
+"idle": SubResource("Animation_fx74j"),
+"move": SubResource("Animation_lvdes")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aymph"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
+radius = 44.4072
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_j7d73")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_mlfe0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gyuw8")
+}
+
+[node name="HealthComponent" parent="." instance=ExtResource("7_0x0xk")]
+script = ExtResource("8_fqqdb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jx351")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_aymph")
+
+[node name="EnemyAI" type="Node2D" parent="."]
+script = ExtResource("9_17o3y")
+
+[node name="EnemyDetectionZone" type="Area2D" parent="EnemyAI" groups=["enemy"]]
+
+[node name="EnemyDetectionZoneShape" type="CollisionShape2D" parent="EnemyAI/EnemyDetectionZone"]
+shape = SubResource("CircleShape2D_vt714")
+one_way_collision_margin = 0.0
+
+[node name="EscapeTimer" type="Timer" parent="EnemyAI"]
+wait_time = 1.5
+one_shot = true
+
+[node name="RandomMoveTimer" type="Timer" parent="EnemyAI"]
+wait_time = 1.5
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="EnemyAI/EnemyDetectionZone" to="EnemyAI" method="_on_enemy_detection_zone_body_entered"]
+[connection signal="body_exited" from="EnemyAI/EnemyDetectionZone" to="EnemyAI" method="_on_enemy_detection_zone_body_exited"]
+[connection signal="timeout" from="EnemyAI/EscapeTimer" to="EnemyAI" method="_on_escape_timer_timeout"]
+[connection signal="timeout" from="EnemyAI/RandomMoveTimer" to="EnemyAI" method="_on_random_move_timer_timeout"]
