@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdjqlg4ak8q7f"]
+
+[ext_resource type="Script" path="res://scripts/DashTrailParticles2D.gd" id="1_barja"]
+
+[sub_resource type="Curve" id="Curve_cmbxg"]
+_data = [Vector2(0.00510205, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0421052), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="DashTrailParticles2D" type="CPUParticles2D"]
+amount = 16
+spread = 2.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 125.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_cmbxg")
+script = ExtResource("1_barja")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
