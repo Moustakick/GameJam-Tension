@@ -13,7 +13,7 @@ size = Vector2(454, 278)
 [sub_resource type="LabelSettings" id="LabelSettings_01kjl"]
 font_size = 10
 
-[node name="MenuPrincipal" type="Node2D"]
+[node name="MenuPrincipal" type="Node2D" groups=["safe_zone"]]
 script = ExtResource("1_bth3h")
 
 [node name="Anchor2D" parent="." instance=ExtResource("3_elsaf")]
