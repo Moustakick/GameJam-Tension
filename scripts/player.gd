@@ -18,6 +18,7 @@ var TIMER = 3 #sec
 @onready var animation_player = $AnimationPlayer
 @onready var dash_label = $AnchorCamera2D/DashLabel
 @onready var gameover_label = $AnchorCamera2D/RichTextLabel
+@onready var dash_trail_effect = preload("res://scene/dash_trail_particles_2d.tscn")
 
 var sw
 var is_sw_key = false
@@ -96,7 +97,11 @@ func dash():
 	var mouse_pos=get_viewport().get_mouse_position()
 	var mouse_direction= mouse_pos - global_pos
 	mouse_direction=mouse_direction.normalized()
+	
 	if dash_cpt>0:
+#		var dash_trail = dash_trail_effect.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+#		dash_trail.look_at(-mouse_direction)
+#		add_child(dash_trail)
 		velocity = Vector2(mouse_direction) * DASH_SPEED
 		dash_cpt -= 1
 		dash_label.text = "dash : %01d" % [dash_cpt]
