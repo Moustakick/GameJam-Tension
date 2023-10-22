@@ -1,7 +1,5 @@
 extends HealthComponent
 
-@onready var blood_particle = preload("res://scene/blood_particles.tscn")
-
 func take_damage(dmg : int):
 	health -= dmg
 	print("Took damage :", dmg )
