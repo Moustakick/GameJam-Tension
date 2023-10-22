@@ -18,3 +18,9 @@ func _on_button_2_pressed():
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+
+func _on_menu_enemy_level_1_enemy_death():
+	get_tree().change_scene_to_file("res://scene/levels/level_template.tscn")
+
+func _on_menu_enemy_level_2_enemy_death():
+	pass # Replace with function body.

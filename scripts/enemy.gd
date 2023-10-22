@@ -7,6 +7,8 @@ class_name Enemy
 
 var SPEED = 15.0
 
+signal enemy_death
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -17,3 +19,6 @@ func _process(delta):
 
 func _on_hurtbox_area_entered(hitbox : HitBox):
 	health.take_damage(hitbox.get_damage())
+	
+func death_signal_activation():
+	emit_signal("enemy_death")

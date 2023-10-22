@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://brgvab2nu42vl"]
+
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ymi4o"]
+[ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_3t6v5"]
+[ext_resource type="Script" path="res://scene/health_component_menu_enemy.gd" id="3_35g4r"]
+[ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="4_l585i"]
+[ext_resource type="Script" path="res://scripts/enemyAI.gd" id="5_wk7xo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
+size = Vector2(8, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aymph"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
+radius = 44.4072
+
+[node name="MenuEnemy" type="CharacterBody2D"]
+script = ExtResource("1_ymi4o")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_3t6v5")]
+script = ExtResource("3_35g4r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jx351")
+
+[node name="EnemySprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_l585i")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_aymph")
+
+[node name="EnemyAI" type="Node2D" parent="."]
+script = ExtResource("5_wk7xo")
+
+[node name="EnemyDetectionZone" type="Area2D" parent="EnemyAI" groups=["enemy"]]
+
+[node name="EnemyDetectionZoneShape" type="CollisionShape2D" parent="EnemyAI/EnemyDetectionZone"]
+shape = SubResource("CircleShape2D_vt714")
+one_way_collision_margin = 0.0
+
+[node name="EscapeTimer" type="Timer" parent="EnemyAI"]
+wait_time = 1.5
+one_shot = true
+
+[node name="RandomMoveTimer" type="Timer" parent="EnemyAI"]
+wait_time = 1.5
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="EnemyAI/EnemyDetectionZone" to="EnemyAI" method="_on_enemy_detection_zone_body_entered"]
+[connection signal="body_exited" from="EnemyAI/EnemyDetectionZone" to="EnemyAI" method="_on_enemy_detection_zone_body_exited"]
+[connection signal="timeout" from="EnemyAI/EscapeTimer" to="EnemyAI" method="_on_escape_timer_timeout"]
+[connection signal="timeout" from="EnemyAI/RandomMoveTimer" to="EnemyAI" method="_on_random_move_timer_timeout"]
