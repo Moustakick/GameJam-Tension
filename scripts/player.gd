@@ -30,6 +30,7 @@ var last_rotation = 0
 var first_movement = false
 var time_left = 0
 var dash_cpt = 1
+var is_safe = false
 var timer=0;
 var end=false
 
@@ -48,6 +49,12 @@ func _ready():
 	
 	dash_label.text = "dash : %01d" % [dash_cpt]
 	dash_label.visible = false
+	
+	var level = get_parent()
+	var safe_zones = get_tree().get_nodes_in_group("safe_zone")
+	if safe_zones.has(level):
+		is_safe = true
+		timer_label.visible = false
 
 func get_movement_input():
 	var direction := Vector2(
@@ -85,11 +92,13 @@ func get_movement_input():
 	move_and_slide()
 	
 	# First movement
-	if  first_movement == false and velocity != Vector2(0,0):
+	if  !first_movement and velocity != Vector2(0,0):
 		first_movement = true
 		anchor_camera.detach_camera()
-		death_timer.start()
 		dash_label.visible = true
+		
+		if !is_safe:
+			death_timer.start()
 
 func dash():
 	var global_pos = get_global_transform_with_canvas().get_origin()
@@ -172,9 +181,12 @@ func _on_timer_timeout():
 	health.take_damage(100)
 
 func enemy_died():
-	time_left = TIMER # reset
-	death_timer.stop()
-	death_timer.start(time_left)
+	if !is_safe:
+		time_left = TIMER # reset
+		death_timer.stop()
+		death_timer.start(time_left)
+		
+	anchor_camera.apply_noise_shake()
 	
 	if dash_cpt<3:
 		dash_cpt += 1

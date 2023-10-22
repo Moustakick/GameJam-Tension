@@ -4,6 +4,7 @@ class_name Enemy
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var ai = $EnemyAI
+@onready var animation_player = $AnimationPlayer
 
 var NORMAL_SPEED = 15.0
 var PANIC_SPEED = 45.0
@@ -17,6 +18,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if is_instance_valid(animation_player):
+		if velocity != Vector2(0,0):
+			animation_player.play("move")
+		else: 
+			animation_player.play("idle")
 	pass
 
 func _on_hurtbox_area_entered(hitbox : HitBox):

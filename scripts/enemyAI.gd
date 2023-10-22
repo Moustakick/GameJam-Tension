@@ -3,6 +3,7 @@ extends Node2D
 @onready var enemy_detection_zone = $EnemyDetectionZone
 @onready var escape_timer = $EscapeTimer
 @onready var move_timer = $RandomMoveTimer
+@onready var animation_player = $AnimationEnemy
 
 # states
 enum State {
@@ -40,6 +41,8 @@ func _physics_process(delta):
 			if is_walking:
 				enemy.velocity = direction * enemy.speed
 				enemy.move_and_slide()
+			else:
+				enemy.velocity = Vector2(0,0)
 			pass
 		State.ESCAPE:
 			enemy.velocity = direction * enemy.speed
