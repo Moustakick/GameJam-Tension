@@ -103,6 +103,22 @@ offset_bottom = 82.0
 theme_override_font_sizes/font_size = 23
 text = "Time"
 
+[node name="EndCommandLabel" type="RichTextLabel" parent="AnchorCamera2D"]
+offset_left = -73.0
+offset_top = 84.0
+offset_right = 75.0
+offset_bottom = 112.0
+bbcode_enabled = true
+text = "[center][font_size=10][b]Press R or Esc[/b][/font_size][center]"
+
+[node name="Title_Label" type="RichTextLabel" parent="AnchorCamera2D"]
+offset_left = -210.0
+offset_top = -120.0
+offset_right = 253.0
+offset_bottom = 29.0
+bbcode_enabled = true
+text = "[center] [color=red][tornado radius=10.0 freq=1.0 connected=1] [b][font_size=50]Chrono Criminal [tornado] [center]"
+
 [node name="AnchorDetector2D" parent="." instance=ExtResource("3_ucnoc")]
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]

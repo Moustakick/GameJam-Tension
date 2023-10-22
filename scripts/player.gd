@@ -21,6 +21,8 @@ var TIMER = 3 #sec
 @onready var gameover_label = $AnchorCamera2D/GameOverLabel
 @onready var victory_label = $AnchorCamera2D/VictoryLabel
 @onready var endtimer_label = $AnchorCamera2D/EndTimeLabel
+@onready var endcommand_label = $AnchorCamera2D/EndCommandLabel
+@onready var title_label = $AnchorCamera2D/Title_Label
 
 var ennemy_group
 var sw
@@ -39,6 +41,7 @@ func _ready():
 	gameover_label.visible=false
 	victory_label.visible=false
 	endtimer_label.visible=false
+	endcommand_label.visible=false
 	end=false
 	death_timer.wait_time = TIMER
 	time_left = death_timer.wait_time
@@ -53,9 +56,11 @@ func _ready():
 	
 	var level = get_parent()
 	var safe_zones = get_tree().get_nodes_in_group("safe_zone")
+	title_label.visible=false
 	if safe_zones.has(level):
 		is_safe = true
 		timer_label.visible = false
+		title_label.visible=true
 
 func get_movement_input():
 	var direction := Vector2(
@@ -97,6 +102,7 @@ func get_movement_input():
 		first_movement = true
 		anchor_camera.detach_camera()
 		dash_label.visible = true
+		title_label.visible=false
 		
 		if !is_safe:
 			death_timer.start()
@@ -156,6 +162,7 @@ func _physics_process(delta):
 		var mils = fmod(timer,1)*100
 		var secs = fmod(timer,60)
 		endtimer_label.text = "in %01d.%02ds" % [secs, mils]
+		endcommand_label.visible=true
 		
 	
 	if not death_timer.is_stopped():
