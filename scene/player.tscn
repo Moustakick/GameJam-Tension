@@ -77,7 +77,7 @@ scale = Vector2(0.363378, 0.365693)
 text = "dash cpt"
 text_direction = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="AnchorCamera2D"]
+[node name="GameOverLabel" type="RichTextLabel" parent="AnchorCamera2D"]
 offset_left = -274.0
 offset_top = -43.0
 offset_right = 256.0
@@ -86,6 +86,22 @@ bbcode_enabled = true
 text = "[center][shake rate=70 level=20][color=red][b][font_size=60]GAME OVER[/font_size][/b][center]"
 fit_content = true
 scroll_following = true
+
+[node name="VictoryLabel" type="RichTextLabel" parent="AnchorCamera2D"]
+offset_left = -153.0
+offset_top = -48.0
+offset_right = 160.0
+offset_bottom = 44.0
+bbcode_enabled = true
+text = "[center][wave amp=100 freq=5][b][font_size=60]Victory[center]"
+
+[node name="EndTimeLabel" type="Label" parent="AnchorCamera2D"]
+offset_left = -38.0
+offset_top = 47.0
+offset_right = 16.0
+offset_bottom = 82.0
+theme_override_font_sizes/font_size = 23
+text = "Time"
 
 [node name="AnchorDetector2D" parent="." instance=ExtResource("3_ucnoc")]
 

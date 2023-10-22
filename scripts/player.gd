@@ -19,7 +19,11 @@ var TIMER = 3 #sec
 @onready var dash_label = $AnchorCamera2D/DashLabel
 @onready var gameover_label = $AnchorCamera2D/RichTextLabel
 @onready var dash_trail_effect = preload("res://scene/dash_trail_particles_2d.tscn")
+@onready var gameover_label = $AnchorCamera2D/GameOverLabel
+@onready var victory_label = $AnchorCamera2D/VictoryLabel
+@onready var endtimer_label = $AnchorCamera2D/EndTimeLabel
 
+var ennemy_group
 var sw
 var is_sw_key = false
 var is_sw_mouse = false
@@ -29,9 +33,14 @@ var first_movement = false
 var time_left = 0
 var dash_cpt = 1
 var is_safe = false
+var timer=0;
+var end=false
 
 func _ready():
 	gameover_label.visible=false
+	victory_label.visible=false
+	endtimer_label.visible=false
+	end=false
 	death_timer.wait_time = TIMER
 	time_left = death_timer.wait_time
 	var mils = fmod(time_left,1)*100
@@ -39,6 +48,7 @@ func _ready():
 	
 	timer_label.add_theme_color_override("font_color", Color(1,1,1))
 	timer_label.text = "%01d.%02d" % [secs, mils]
+	
 	dash_label.text = "dash : %01d" % [dash_cpt]
 	dash_label.visible = false
 	
@@ -136,7 +146,18 @@ func _input(event):
 		dash()
 
 func _physics_process(delta):
+	timer+=delta
+	ennemy_group=get_tree().get_nodes_in_group("enemy")
 	get_movement_input()
+	if(ennemy_group.size()==0 && end==false):
+		end=true
+		death_timer.stop()
+		victory_label.visible=true
+		endtimer_label.visible=true
+		var mils = fmod(timer,1)*100
+		var secs = fmod(timer,60)
+		endtimer_label.text = "in %01d.%02ds" % [secs, mils]
+		
 	
 	if not death_timer.is_stopped():
 		time_left -= delta
