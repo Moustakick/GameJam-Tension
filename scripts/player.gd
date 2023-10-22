@@ -82,8 +82,12 @@ func get_movement_input():
 		dash_label.visible = true
 
 func dash():
+	var global_pos = get_global_transform_with_canvas().get_origin()
+	var mouse_pos=get_viewport().get_mouse_position()
+	var mouse_direction= mouse_pos - global_pos
+	mouse_direction=mouse_direction.normalized()
 	if dash_cpt>0:
-		velocity = Vector2.RIGHT.rotated(last_rotation) * DASH_SPEED
+		velocity = Vector2(mouse_direction) * DASH_SPEED
 		dash_cpt -= 1
 		dash_label.text = "dash : %01d" % [dash_cpt]
 		if dash_cpt<1:
