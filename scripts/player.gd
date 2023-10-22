@@ -17,7 +17,6 @@ var TIMER = 3 #sec
 @onready var timer_label = $AnchorCamera2D/TimerLabel
 @onready var animation_player = $AnimationPlayer
 @onready var dash_label = $AnchorCamera2D/DashLabel
-@onready var gameover_label = $AnchorCamera2D/RichTextLabel
 @onready var dash_trail_effect = preload("res://scene/dash_trail_particles_2d.tscn")
 @onready var gameover_label = $AnchorCamera2D/GameOverLabel
 @onready var victory_label = $AnchorCamera2D/VictoryLabel
