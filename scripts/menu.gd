@@ -21,3 +21,6 @@ func _on_menu_enemy_level_2_enemy_death():
 
 func _on_menu_enemy_level_3_enemy_death():
 	get_tree().change_scene_to_file("res://scene/levels/level_3.tscn")
+
+func _on_menu_enemy_level_5_enemy_death():
+	get_tree().change_scene_to_file("res://scene/levels/level_5.tscn")

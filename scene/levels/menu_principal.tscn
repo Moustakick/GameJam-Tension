@@ -94,9 +94,24 @@ label_settings = SubResource("LabelSettings_01kjl")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="MenuEnemyLevel4" parent="." instance=ExtResource("5_1htdj")]
+position = Vector2(149, 181)
+
+[node name="Level5Label" type="Label" parent="MenuEnemyLevel4"]
+offset_left = -15.0
+offset_top = -19.0
+offset_right = 16.0
+offset_bottom = -2.0
+text = "level 5
+"
+label_settings = SubResource("LabelSettings_01kjl")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Player" parent="." instance=ExtResource("4_b47ld")]
 position = Vector2(224, 127)
 
 [connection signal="enemy_death" from="MenuEnemyLevel1" to="." method="_on_menu_enemy_level_1_enemy_death"]
 [connection signal="enemy_death" from="MenuEnemyLevel2" to="." method="_on_menu_enemy_level_2_enemy_death"]
 [connection signal="enemy_death" from="MenuEnemyLevel3" to="." method="_on_menu_enemy_level_3_enemy_death"]
+[connection signal="enemy_death" from="MenuEnemyLevel4" to="." method="_on_menu_enemy_level_5_enemy_death"]
