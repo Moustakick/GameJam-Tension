@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xa0uvgcc2c32" path="res://scene/enemy.tscn" id="4_dr7hd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2v1o"]
-size = Vector2(48, 40.5)
+size = Vector2(454, 278)
 
 [node name="level_template" type="Node2D"]
 script = ExtResource("1_uicpb")
@@ -21,7 +21,7 @@ position = Vector2(222, 133)
 zoom_level = 2
 
 [node name="SceneShape" type="CollisionShape2D" parent="Anchor2D"]
-position = Vector2(-153, -68)
+position = Vector2(1, 3)
 shape = SubResource("RectangleShape2D_o2v1o")
 
 [node name="Player" parent="." instance=ExtResource("3_fk47h")]
