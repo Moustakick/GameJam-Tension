@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dax2x8onk7n16"]
+[gd_scene load_steps=16 format=3 uid="uid://dax2x8onk7n16"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_406lb"]
 [ext_resource type="Texture2D" uid="uid://bwr7upym8yf3s" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0004.png" id="1_s8q7j"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bbwjrdk3jdfry" path="res://scene/anchor_detector_2d.tscn" id="3_ucnoc"]
 [ext_resource type="Script" path="res://scripts/Hurtbox.gd" id="3_y64kw"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="4_q6ny3"]
+[ext_resource type="Texture2D" uid="uid://dsoqv4ttheae1" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_idle2.png" id="7_f8dlc"]
+[ext_resource type="Texture2D" uid="uid://c6lslac43lrqq" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move1.png" id="8_k50qj"]
+[ext_resource type="Texture2D" uid="uid://22dha2qmtvwx" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move2.png" id="9_qlowl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bn8g"]
 size = Vector2(6, 6)
@@ -14,6 +17,44 @@ size = Vector2(6, 6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ofb1s"]
 size = Vector2(8, 8)
+
+[sub_resource type="Animation" id="Animation_0hn32"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("1_s8q7j"), ExtResource("7_f8dlc")]
+}
+
+[sub_resource type="Animation" id="Animation_u401k"]
+resource_name = "move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("8_k50qj"), ExtResource("9_qlowl")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2dfhq"]
+_data = {
+"idle": SubResource("Animation_0hn32"),
+"move": SubResource("Animation_u401k")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_406lb")
@@ -26,6 +67,15 @@ offset_top = -106.0
 offset_right = 20.0
 offset_bottom = -80.0
 text = "Test"
+
+[node name="DashLabel" type="Label" parent="AnchorCamera2D"]
+offset_left = 149.0
+offset_top = 85.0
+offset_right = 215.0
+offset_bottom = 111.0
+scale = Vector2(0.363378, 0.365693)
+text = "dash cpt"
+text_direction = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="AnchorCamera2D"]
 offset_left = -274.0
@@ -44,7 +94,6 @@ shape = SubResource("RectangleShape2D_8bn8g")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_87raf")
-texture = ExtResource("1_s8q7j")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
@@ -69,6 +118,11 @@ position = Vector2(4, 0)
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2dfhq")
+}
 
 [connection signal="anchor_detached" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detached"]
 [connection signal="anchor_detected" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detected"]

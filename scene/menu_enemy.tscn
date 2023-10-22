@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://xa0uvgcc2c32"]
+[gd_scene load_steps=9 format=3 uid="uid://dtkl4irg0f4q5"]
 
-[ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="1_ci02h"]
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_n4ubt"]
-[ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_rsun5"]
-[ext_resource type="Script" path="res://scene/health_component_enemy.gd" id="3_8aan7"]
-[ext_resource type="Script" path="res://scripts/enemyAI.gd" id="4_6mwtk"]
+[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_ymi4o"]
+[ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_3t6v5"]
+[ext_resource type="Script" path="res://scene/health_component_menu_enemy.gd" id="3_35g4r"]
+[ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="4_l585i"]
+[ext_resource type="Script" path="res://scripts/enemyAI.gd" id="5_wk7xo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx351"]
 size = Vector2(8, 8)
@@ -15,17 +15,17 @@ size = Vector2(8, 8)
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
 radius = 44.4072
 
-[node name="Enemy" type="CharacterBody2D"]
-script = ExtResource("1_n4ubt")
+[node name="MenuEnemy" type="CharacterBody2D"]
+script = ExtResource("1_ymi4o")
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_rsun5")]
-script = ExtResource("3_8aan7")
+[node name="HealthComponent" parent="." instance=ExtResource("2_3t6v5")]
+script = ExtResource("3_35g4r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jx351")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_ci02h")
+texture = ExtResource("4_l585i")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
@@ -35,7 +35,7 @@ collision_mask = 4
 shape = SubResource("RectangleShape2D_aymph")
 
 [node name="EnemyAI" type="Node2D" parent="."]
-script = ExtResource("4_6mwtk")
+script = ExtResource("5_wk7xo")
 
 [node name="EnemyDetectionZone" type="Area2D" parent="EnemyAI" groups=["enemy"]]
 

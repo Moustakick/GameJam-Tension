@@ -4,7 +4,7 @@ extends CharacterBody2D
 var FRICTION = 0.4
 var SPEED = 100.0
 var DASH_SPEED = 2000.0
-var TIMER = 3 #sec
+var TIMER = 10 #sec
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -15,6 +15,8 @@ var TIMER = 3 #sec
 @onready var anchor_camera = $AnchorCamera2D
 @onready var death_timer = $DeathTimer
 @onready var timer_label = $AnchorCamera2D/TimerLabel
+@onready var animation_player = $AnimationPlayer
+@onready var dash_label = $AnchorCamera2D/DashLabel
 @onready var gameover_label = $AnchorCamera2D/RichTextLabel
 
 var sw
@@ -24,6 +26,7 @@ var direction
 var last_rotation = 0
 var first_movement = false
 var time_left = 0
+var dash_cpt = 1
 
 func _ready():
 	gameover_label.visible=false
@@ -32,8 +35,9 @@ func _ready():
 	var mils = fmod(time_left,1)*100
 	var secs = fmod(time_left,60)
 	
-	var count_down = "%01d.%02d" % [secs, mils]
-	timer_label.text = count_down
+	timer_label.text = "%01d.%02d" % [secs, mils]
+	dash_label.text = "dash : %01d" % [dash_cpt]
+	dash_label.visible = false
 
 func get_movement_input():
 	var direction := Vector2(
@@ -47,17 +51,18 @@ func get_movement_input():
 	if direction.length() > 1.0:
 		direction = direction.normalized()
 
-
 	var mouse_pos = get_viewport().get_mouse_position()
 	var global_pos = get_global_transform_with_canvas().get_origin()
 	
 	# update sword position key
 	if direction == Vector2(0,0):
 		center_marker_key.rotation = last_rotation
+		animation_player.play("idle")
 	else:
 		center_marker_key.rotation = 0
 		center_marker_key.rotate(direction.angle())
 		last_rotation = center_marker_key.rotation
+		animation_player.play("move")
 	
 	# update sword position key
 	var mouse_direction = mouse_pos - global_pos
@@ -74,9 +79,17 @@ func get_movement_input():
 		first_movement = true
 		anchor_camera.detach_camera()
 		death_timer.start()
+		dash_label.visible = true
 
 func dash():
-	velocity = Vector2.RIGHT.rotated(last_rotation) * DASH_SPEED
+	if dash_cpt>0:
+		velocity = Vector2.RIGHT.rotated(last_rotation) * DASH_SPEED
+		dash_cpt -= 1
+		dash_label.text = "dash : %01d" % [dash_cpt]
+		if dash_cpt<1:
+			dash_label.add_theme_color_override("font_color", Color(1,0,0))
+		else:
+			dash_label.add_theme_color_override("font_color", Color(1,1,1))
 
 func _input(event):
 	# attack with key board
@@ -115,31 +128,28 @@ func _physics_process(delta):
 		var mils = fmod(time_left,1)*100
 		var secs = fmod(time_left,60)
 		
-		var count_down = "%01d.%02d" % [secs, mils]
-		
-		timer_label.text = count_down
-		
+		timer_label.text = "%01d.%02d" % [secs, mils]
 
 func _on_hurtbox_body_entered(body):
 	print(1)
 	health.take_damage(1)
-	pass # Replace with function body.
 
 func _on_hurtbox_area_entered(area):
 	print(1)
 	health.take_damage(1)
-	pass # Replace with function body.
 
 func _on_timer_timeout():
 	anchor_camera.reparent(get_parent())
 	health.take_damage(100)
-	
-	print("Boum")
-	pass # Replace with function body.
 
 func enemy_died():
-	print("AHAHHAHAHA")
-#	time_left = time_left+3
 	time_left = TIMER # reset
 	death_timer.stop()
 	death_timer.start(time_left)
+	
+	if dash_cpt<3:
+		dash_cpt += 1
+		dash_label.text = "dash : %01d" % [dash_cpt]
+		dash_label.add_theme_color_override("font_color", Color(1,1,1))
+	elif dash_cpt==3:
+		dash_label.add_theme_color_override("font_color", Color(1,0,0))

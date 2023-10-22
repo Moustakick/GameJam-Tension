@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpyj5xjhr40tg"]
+
+[ext_resource type="Texture2D" uid="uid://bsrnmadxflb36" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0001.png" id="1_fyyi7"]
+[ext_resource type="Script" path="res://scripts/blood_particles.gd" id="2_8ka7n"]
+
+[sub_resource type="Curve" id="Curve_bopmm"]
+_data = [Vector2(0.0153061, 0.0105263), 0.0, 0.0, 0, 0, Vector2(0.984694, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="BloodParticles" type="CPUParticles2D"]
+lifetime = 0.2
+explosiveness = 1.0
+local_coords = true
+texture = ExtResource("1_fyyi7")
+spread = 25.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 200.0
+scale_amount_min = 0.1
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_bopmm")
+color = Color(1, 0, 0, 1)
+script = ExtResource("2_8ka7n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
