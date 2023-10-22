@@ -4,7 +4,7 @@ extends CharacterBody2D
 var FRICTION = 0.4
 var SPEED = 100.0
 var DASH_SPEED = 2000.0
-var TIMER = 10 #sec
+var TIMER = 3 #sec
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -35,6 +35,7 @@ func _ready():
 	var mils = fmod(time_left,1)*100
 	var secs = fmod(time_left,60)
 	
+	timer_label.add_theme_color_override("font_color", Color(1,1,1))
 	timer_label.text = "%01d.%02d" % [secs, mils]
 	dash_label.text = "dash : %01d" % [dash_cpt]
 	dash_label.visible = false
@@ -121,14 +122,16 @@ func _physics_process(delta):
 	
 	if not death_timer.is_stopped():
 		time_left -= delta
+		
 		if time_left < 0.001:
 			time_left = 0
-			gameover_label.visible=true
-			
+		
 		var mils = fmod(time_left,1)*100
 		var secs = fmod(time_left,60)
-		
 		timer_label.text = "%01d.%02d" % [secs, mils]
+		
+		var new_color = lerp(Color(0,0,0), Color(1,1,1), secs/TIMER)
+		timer_label.add_theme_color_override("font_color", new_color)
 
 func _on_hurtbox_body_entered(body):
 	print(1)
@@ -140,6 +143,8 @@ func _on_hurtbox_area_entered(area):
 
 func _on_timer_timeout():
 	anchor_camera.reparent(get_parent())
+	gameover_label.visible=true
+	timer_label.add_theme_color_override("font_color", Color(1,0,0))
 	health.take_damage(100)
 
 func enemy_died():
