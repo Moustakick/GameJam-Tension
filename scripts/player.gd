@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 var FRICTION = 0.4
 var SPEED = 100.0
+var DASH_SPEED = 2000.0
+var TIMER = 10 #sec
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -23,6 +25,7 @@ var first_movement = false
 var time_left = 0
 
 func _ready():
+	death_timer.wait_time = TIMER
 	time_left = death_timer.wait_time
 	var mils = fmod(time_left,1)*100
 	var secs = fmod(time_left,60)
@@ -70,6 +73,9 @@ func get_movement_input():
 		anchor_camera.detach_camera()
 		death_timer.start()
 
+func dash():
+	velocity = Vector2.RIGHT.rotated(last_rotation) * DASH_SPEED
+
 func _input(event):
 	# attack with key board
 	if not is_sw_mouse:
@@ -94,6 +100,8 @@ func _input(event):
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().quit()
+	if event.is_action_pressed("dash"):
+		dash()
 
 func _physics_process(delta):
 	get_movement_input()
@@ -102,8 +110,6 @@ func _physics_process(delta):
 		time_left -= delta
 		if time_left < 0.001:
 			time_left = 0
-			anchor_camera.reparent(get_parent())
-			health.take_damage(100)
 			
 		var mils = fmod(time_left,1)*100
 		var secs = fmod(time_left,60)
@@ -124,5 +130,14 @@ func _on_hurtbox_area_entered(area):
 	pass # Replace with function body.
 
 func _on_timer_timeout():
+	anchor_camera.reparent(get_parent())
+	health.take_damage(100)
 	print("Boum")
 	pass # Replace with function body.
+
+func enemy_died():
+	print("AHAHHAHAHA")
+#	time_left = time_left+3
+	time_left = TIMER # reset
+	death_timer.stop()
+	death_timer.start(time_left)
