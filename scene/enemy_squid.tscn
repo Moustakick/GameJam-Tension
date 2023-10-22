@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dam4c3ha40arr"]
+[gd_scene load_steps=17 format=3 uid="uid://dam4c3ha40arr"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_j7d73"]
 [ext_resource type="Texture2D" uid="uid://3vytj2bntdp1" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="2_mlfe0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="7_0x0xk"]
 [ext_resource type="Script" path="res://scene/health_component_enemy.gd" id="8_fqqdb"]
 [ext_resource type="Script" path="res://scripts/enemyAI.gd" id="9_17o3y"]
+[ext_resource type="Texture2D" uid="uid://cexuldgh3oa8v" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0099.png" id="10_efifc"]
 
 [sub_resource type="Animation" id="Animation_fx74j"]
 resource_name = "idle"
@@ -57,7 +58,7 @@ size = Vector2(8, 8)
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
 radius = 44.4072
 
-[node name="EnemySquid" type="CharacterBody2D"]
+[node name="EnemySquid" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_j7d73")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
@@ -96,6 +97,11 @@ one_shot = true
 
 [node name="RandomMoveTimer" type="Timer" parent="EnemyAI"]
 wait_time = 1.5
+
+[node name="DebutSpriteEnemy" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+rotation = 1.5705
+texture = ExtResource("10_efifc")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="EnemyAI/EnemyDetectionZone" to="EnemyAI" method="_on_enemy_detection_zone_body_entered"]

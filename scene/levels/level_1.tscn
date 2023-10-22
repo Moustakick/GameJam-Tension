@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bme7fw6ppbpk8"]
+[gd_scene load_steps=9 format=3 uid="uid://bme7fw6ppbpk8"]
 
 [ext_resource type="Script" path="res://scripts/level_template.gd" id="1_db8a8"]
 [ext_resource type="PackedScene" uid="uid://hcok2ripdp8k" path="res://scene/levels/tile_map.tscn" id="2_8jugp"]
 [ext_resource type="PackedScene" uid="uid://hag24t10sqiu" path="res://scene/anchor_2d.tscn" id="3_mmadj"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="4_pvmdy"]
 [ext_resource type="PackedScene" uid="uid://xa0uvgcc2c32" path="res://scene/enemy.tscn" id="5_045em"]
+[ext_resource type="PackedScene" uid="uid://ces6ls52eh56c" path="res://scene/enemy_darksorcerer.tscn" id="6_bm2hm"]
+[ext_resource type="PackedScene" uid="uid://loulseioox7d" path="res://scene/enemy_woman.tscn" id="7_c5hwv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2v1o"]
 size = Vector2(454, 278)
@@ -28,22 +30,22 @@ shape = SubResource("RectangleShape2D_o2v1o")
 [node name="Player" parent="." instance=ExtResource("4_pvmdy")]
 position = Vector2(67, 29)
 
-[node name="Enemy" parent="." instance=ExtResource("5_045em")]
-position = Vector2(136, 64)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_045em")]
-position = Vector2(59, 128)
-
 [node name="Enemy3" parent="." instance=ExtResource("5_045em")]
 position = Vector2(224, 98)
 
 [node name="Enemy4" parent="." instance=ExtResource("5_045em")]
 position = Vector2(298, 38)
 
-[node name="Enemy5" parent="." instance=ExtResource("5_045em")]
-position = Vector2(316, 142)
-
 [node name="EndScreenTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="EnemyDarkSorcerer" parent="." instance=ExtResource("6_bm2hm")]
+position = Vector2(52, 133)
+
+[node name="EnemyWoman" parent="." instance=ExtResource("7_c5hwv")]
+position = Vector2(306, 138)
+
+[node name="EnemyWoman2" parent="." instance=ExtResource("7_c5hwv")]
+position = Vector2(130, 64)
 
 [connection signal="timeout" from="EndScreenTimer" to="." method="_on_end_screen_timer_timeout"]
