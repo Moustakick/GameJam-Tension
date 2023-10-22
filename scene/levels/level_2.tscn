@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dmxfdodk6ocn4"]
+[gd_scene load_steps=9 format=3 uid="uid://dmxfdodk6ocn4"]
 
 [ext_resource type="Script" path="res://scripts/level_template.gd" id="1_frdwy"]
 [ext_resource type="PackedScene" uid="uid://hcok2ripdp8k" path="res://scene/levels/tile_map.tscn" id="2_8sgru"]
 [ext_resource type="PackedScene" uid="uid://hag24t10sqiu" path="res://scene/anchor_2d.tscn" id="3_voneq"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="4_tkah6"]
 [ext_resource type="PackedScene" uid="uid://xa0uvgcc2c32" path="res://scene/enemy.tscn" id="5_amwmh"]
+[ext_resource type="PackedScene" uid="uid://loulseioox7d" path="res://scene/enemy_woman.tscn" id="6_enmsa"]
+[ext_resource type="PackedScene" uid="uid://ces6ls52eh56c" path="res://scene/enemy_darksorcerer.tscn" id="7_ahfik"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2v1o"]
 size = Vector2(454, 278)
@@ -28,25 +30,25 @@ shape = SubResource("RectangleShape2D_o2v1o")
 [node name="Player" parent="." instance=ExtResource("4_tkah6")]
 position = Vector2(328, 35)
 
-[node name="Enemy" parent="." instance=ExtResource("5_amwmh")]
-position = Vector2(256, 62)
-
-[node name="Enemy2" parent="." instance=ExtResource("5_amwmh")]
-position = Vector2(59, 128)
-
 [node name="Enemy3" parent="." instance=ExtResource("5_amwmh")]
 position = Vector2(208, 116)
 
 [node name="Enemy4" parent="." instance=ExtResource("5_amwmh")]
 position = Vector2(139, 82)
 
-[node name="Enemy5" parent="." instance=ExtResource("5_amwmh")]
-position = Vector2(316, 142)
-
-[node name="Enemy6" parent="." instance=ExtResource("5_amwmh")]
-position = Vector2(60, 48)
-
 [node name="EndScreenTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="EnemyWoman" parent="." instance=ExtResource("6_enmsa")]
+position = Vector2(65, 53)
+
+[node name="EnemyDarkSorcerer" parent="." instance=ExtResource("7_ahfik")]
+position = Vector2(68, 129)
+
+[node name="EnemyWoman2" parent="." instance=ExtResource("6_enmsa")]
+position = Vector2(311, 137)
+
+[node name="EnemyDarkSorcerer2" parent="." instance=ExtResource("7_ahfik")]
+position = Vector2(267, 68)
 
 [connection signal="timeout" from="EndScreenTimer" to="." method="_on_end_screen_timer_timeout"]
