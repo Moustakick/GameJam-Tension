@@ -10,5 +10,7 @@ func _process(delta):
 	pass
 
 func _unhandled_input(event):
+	if event.is_action_pressed("reload"):
+		get_tree().reload_current_scene()
 	if event.is_action_pressed("ui_cancel"):
 		get_tree().change_scene_to_file("res://scene/menu.tscn")
