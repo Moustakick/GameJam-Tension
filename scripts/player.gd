@@ -22,6 +22,7 @@ var TIMER = 3 #sec
 @onready var victory_label = $AnchorCamera2D/VictoryLabel
 @onready var endtimer_label = $AnchorCamera2D/EndTimeLabel
 @onready var block_timer = $BlockTimer
+@onready var debut_sprite = $DebutSprite
 
 var ennemy_group
 var sw
@@ -36,6 +37,8 @@ var is_safe = false
 var timer=0;
 var end = false
 var is_blocked = true
+var sin_amp = 0.4
+var sin_freq = 10
 
 func _ready():
 	gameover_label.visible=false
@@ -101,6 +104,7 @@ func get_movement_input():
 		first_movement = true
 		anchor_camera.detach_camera()
 		dash_label.visible = true
+		debut_sprite.visible = false
 		
 		if !is_safe:
 			death_timer.start()
@@ -180,6 +184,9 @@ func _physics_process(delta):
 		
 		var new_color = lerp(Color(0,0,0), Color(1,1,1), secs/TIMER)
 		timer_label.add_theme_color_override("font_color", new_color)
+	
+	if !first_movement and velocity == Vector2(0,0):
+		debut_sprite.move_local_x(sin_amp * sin(timer * sin_freq), true)
 
 func _on_hurtbox_body_entered(body):
 	print(1)

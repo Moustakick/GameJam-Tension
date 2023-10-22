@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dax2x8onk7n16"]
+[gd_scene load_steps=17 format=3 uid="uid://dax2x8onk7n16"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_406lb"]
 [ext_resource type="Texture2D" uid="uid://bwr7upym8yf3s" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0004.png" id="1_s8q7j"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dsoqv4ttheae1" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_idle2.png" id="7_f8dlc"]
 [ext_resource type="Texture2D" uid="uid://c6lslac43lrqq" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move1.png" id="8_k50qj"]
 [ext_resource type="Texture2D" uid="uid://22dha2qmtvwx" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move2.png" id="9_qlowl"]
+[ext_resource type="Texture2D" uid="uid://cexuldgh3oa8v" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0099.png" id="10_3phq7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bn8g"]
 size = Vector2(6, 6)
@@ -144,6 +145,11 @@ libraries = {
 [node name="BlockTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="DebutSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+rotation = 1.5705
+texture = ExtResource("10_3phq7")
 
 [connection signal="anchor_detached" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detached"]
 [connection signal="anchor_detected" from="AnchorDetector2D" to="AnchorCamera2D" method="_on_AnchorDetector2D_anchor_detected"]
