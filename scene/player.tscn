@@ -110,7 +110,7 @@ offset_top = 84.0
 offset_right = 75.0
 offset_bottom = 112.0
 bbcode_enabled = true
-text = "[center][font_size=10][b]Press R or Esc[/b][/font_size][center]"
+text = "[center][font_size=10][b]Press [R] or [Esc][/b][/font_size][center]"
 
 [node name="Title_Label" type="RichTextLabel" parent="AnchorCamera2D"]
 offset_left = -210.0

@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="GameJam"
+config/name="Chrono Criminal"
 run/main_scene="res://scene/levels/menu_principal.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://kenney_micro-roguelike/Tiles/icon.png"
 
 [display]
 

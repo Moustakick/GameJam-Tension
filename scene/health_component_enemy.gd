@@ -13,7 +13,7 @@ func take_damage(dmg : int):
 		level.add_child(blood)
 
 func blood_spray():
-	var blood_instance = blood_particle.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+	var blood_instance = blood_particle.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	get_tree().current_scene.add_child(blood_instance)
 	blood_instance.global_position = global_position
 	var player = get_tree().get_nodes_in_group("player")[0]
