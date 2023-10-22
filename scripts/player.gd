@@ -15,6 +15,7 @@ var TIMER = 3 #sec
 @onready var anchor_camera = $AnchorCamera2D
 @onready var death_timer = $DeathTimer
 @onready var timer_label = $AnchorCamera2D/TimerLabel
+@onready var gameover_label = $AnchorCamera2D/RichTextLabel
 
 var sw
 var is_sw_key = false
@@ -25,6 +26,7 @@ var first_movement = false
 var time_left = 0
 
 func _ready():
+	gameover_label.visible=false
 	death_timer.wait_time = TIMER
 	time_left = death_timer.wait_time
 	var mils = fmod(time_left,1)*100
@@ -108,6 +110,7 @@ func _physics_process(delta):
 		time_left -= delta
 		if time_left < 0.001:
 			time_left = 0
+			gameover_label.visible=true
 			
 		var mils = fmod(time_left,1)*100
 		var secs = fmod(time_left,60)
@@ -130,6 +133,7 @@ func _on_hurtbox_area_entered(area):
 func _on_timer_timeout():
 	anchor_camera.reparent(get_parent())
 	health.take_damage(100)
+	
 	print("Boum")
 	pass # Replace with function body.
 

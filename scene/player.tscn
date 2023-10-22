@@ -27,6 +27,16 @@ offset_right = 20.0
 offset_bottom = -80.0
 text = "Test"
 
+[node name="RichTextLabel" type="RichTextLabel" parent="AnchorCamera2D"]
+offset_left = -274.0
+offset_top = -43.0
+offset_right = 256.0
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "[center][shake rate=70 level=20][color=red][b][font_size=60]GAME OVER[/font_size][/b][center]"
+fit_content = true
+scroll_following = true
+
 [node name="AnchorDetector2D" parent="." instance=ExtResource("3_ucnoc")]
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
