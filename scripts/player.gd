@@ -4,7 +4,7 @@ extends CharacterBody2D
 var FRICTION = 0.4
 var SPEED = 100.0
 var DASH_SPEED = 2000.0
-var TIMER = 10 #sec
+var TIMER = 3 #sec
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -165,6 +165,8 @@ func enemy_died():
 		time_left = TIMER # reset
 		death_timer.stop()
 		death_timer.start(time_left)
+		
+	anchor_camera.apply_noise_shake()
 	
 	if dash_cpt<3:
 		dash_cpt += 1

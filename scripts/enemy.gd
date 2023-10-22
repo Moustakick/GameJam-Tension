@@ -19,7 +19,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if is_instance_valid(animation_player):
-		print(velocity)
 		if velocity != Vector2(0,0):
 			animation_player.play("move")
 		else: 

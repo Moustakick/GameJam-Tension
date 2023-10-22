@@ -2,12 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://ddl02dy0kmxew" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0011.png" id="1_ci02h"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_n4ubt"]
-[ext_resource type="Texture2D" uid="uid://cgw84dtp1rkj1" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="2_rj2ep"]
+[ext_resource type="Texture2D" uid="uid://3vytj2bntdp1" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="2_rj2ep"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="2_rsun5"]
 [ext_resource type="Script" path="res://scene/health_component_enemy.gd" id="3_8aan7"]
 [ext_resource type="Script" path="res://scripts/enemyAI.gd" id="4_6mwtk"]
-[ext_resource type="Texture2D" uid="uid://coakr3cj3ta82" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_1.png" id="5_dc023"]
-[ext_resource type="Texture2D" uid="uid://c0v7xv6itrqu3" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_idle_2.png" id="7_ukutj"]
+[ext_resource type="Texture2D" uid="uid://u7ofhjaehuj" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_1.png" id="5_dc023"]
+[ext_resource type="Texture2D" uid="uid://cxmeul6s35eu4" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_idle_2.png" id="7_ukutj"]
 
 [sub_resource type="Animation" id="Animation_fx74j"]
 resource_name = "idle"
