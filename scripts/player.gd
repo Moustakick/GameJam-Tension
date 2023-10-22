@@ -173,6 +173,7 @@ func _physics_process(delta):
 		death_timer.stop()
 		victory_label.visible=true
 		endtimer_label.visible=true
+		timer_label.add_theme_color_override("font_color", Color(1,1,1))
 		var mils = fmod(timer,1)*100
 		var secs = fmod(timer,60)
 		endtimer_label.text = "in %01d.%02ds" % [secs, mils]
