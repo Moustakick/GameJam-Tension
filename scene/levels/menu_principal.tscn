@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqcs5h8icc5r5"]
+[gd_scene load_steps=8 format=3 uid="uid://dqcs5h8icc5r5"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_bth3h"]
 [ext_resource type="PackedScene" uid="uid://hcok2ripdp8k" path="res://scene/levels/tile_map.tscn" id="2_74u4p"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2v1o"]
 size = Vector2(454, 278)
+
+[sub_resource type="LabelSettings" id="LabelSettings_01kjl"]
+font_size = 10
 
 [node name="MenuPrincipal" type="Node2D"]
 script = ExtResource("1_bth3h")
@@ -29,6 +32,16 @@ position = Vector2(66, 62)
 
 [node name="MenuEnemyLevel1" parent="." instance=ExtResource("5_1htdj")]
 position = Vector2(166, 134)
+
+[node name="Level1Label" type="Label" parent="MenuEnemyLevel1"]
+offset_left = -15.0
+offset_top = -19.0
+offset_right = 16.0
+offset_bottom = -2.0
+text = "level 1"
+label_settings = SubResource("LabelSettings_01kjl")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="MenuEnemyLevel2" parent="." instance=ExtResource("5_1htdj")]
 position = Vector2(265, 90)
