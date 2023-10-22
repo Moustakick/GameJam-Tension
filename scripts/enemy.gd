@@ -43,6 +43,5 @@ func death_signal_activation():
 	emit_signal("enemy_death")
 
 func party_begin():
-	print("bonjour")
 	party_has_begin = true
 	debut_sprite.visible = false

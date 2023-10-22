@@ -199,11 +199,9 @@ func _physics_process(delta):
 		debut_sprite.move_local_x(sin_amp * sin(timer * sin_freq), true)
 
 func _on_hurtbox_body_entered(body):
-	print(1)
 	health.take_damage(1)
 
 func _on_hurtbox_area_entered(area):
-	print(1)
 	health.take_damage(1)
 
 func _on_timer_timeout():
@@ -228,5 +226,4 @@ func enemy_died():
 		dash_label.add_theme_color_override("font_color", Color(1,0,0))
 
 func _on_block_timer_timeout():
-	print("coucou")
 	is_blocked = false
