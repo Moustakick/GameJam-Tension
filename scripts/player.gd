@@ -21,6 +21,7 @@ var TIMER = 3 #sec
 @onready var gameover_label = $AnchorCamera2D/GameOverLabel
 @onready var victory_label = $AnchorCamera2D/VictoryLabel
 @onready var endtimer_label = $AnchorCamera2D/EndTimeLabel
+@onready var block_timer = $BlockTimer
 
 var ennemy_group
 var sw
@@ -33,7 +34,8 @@ var time_left = 0
 var dash_cpt = 1
 var is_safe = false
 var timer=0;
-var end=false
+var end = false
+var is_blocked = true
 
 func _ready():
 	gameover_label.visible=false
@@ -56,6 +58,8 @@ func _ready():
 	if safe_zones.has(level):
 		is_safe = true
 		timer_label.visible = false
+	
+	block_timer.start()
 
 func get_movement_input():
 	var direction := Vector2(
@@ -120,6 +124,9 @@ func dash():
 			dash_label.add_theme_color_override("font_color", Color(1,1,1))
 
 func _input(event):
+	if is_blocked:
+		return
+	
 	# attack with key board
 	if not is_sw_mouse:
 		if event.is_action_pressed("attack_key"):
@@ -145,6 +152,9 @@ func _input(event):
 		dash()
 
 func _physics_process(delta):
+	if is_blocked:
+		return
+	
 	timer+=delta
 	ennemy_group=get_tree().get_nodes_in_group("enemy")
 	get_movement_input()
@@ -199,3 +209,7 @@ func enemy_died():
 		dash_label.add_theme_color_override("font_color", Color(1,1,1))
 	elif dash_cpt==3:
 		dash_label.add_theme_color_override("font_color", Color(1,0,0))
+
+func _on_block_timer_timeout():
+	print("coucou")
+	is_blocked = false
