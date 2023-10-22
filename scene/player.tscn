@@ -68,6 +68,15 @@ offset_right = 20.0
 offset_bottom = -80.0
 text = "Test"
 
+[node name="DashLabel" type="Label" parent="AnchorCamera2D"]
+offset_left = 149.0
+offset_top = 85.0
+offset_right = 215.0
+offset_bottom = 111.0
+scale = Vector2(0.363378, 0.365693)
+text = "dash cpt"
+text_direction = 2
+
 [node name="AnchorDetector2D" parent="." instance=ExtResource("3_ucnoc")]
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
