@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://scripts/enemyAI.gd" id="4_6mwtk"]
 [ext_resource type="Texture2D" uid="uid://u7ofhjaehuj" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_1.png" id="5_dc023"]
 [ext_resource type="Texture2D" uid="uid://cxmeul6s35eu4" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_idle_2.png" id="7_ukutj"]
-[ext_resource type="Texture2D" uid="uid://cexuldgh3oa8v" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0099.png" id="9_pcxhd"]
+[ext_resource type="Texture2D" uid="uid://cexuldgh3oa8v" path="res://kenney_micro-roguelike/Tiles/Monochrome/tile_0099.png" id="9_wx0ht"]
 
 [sub_resource type="Animation" id="Animation_fx74j"]
 resource_name = "idle"
@@ -57,7 +57,7 @@ size = Vector2(8, 8)
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
 radius = 44.4072
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+[node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_n4ubt")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]
@@ -100,7 +100,7 @@ wait_time = 1.5
 [node name="DebutSpriteEnemy" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 rotation = 1.5705
-texture = ExtResource("9_pcxhd")
+texture = ExtResource("9_wx0ht")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="EnemyAI/EnemyDetectionZone" to="EnemyAI" method="_on_enemy_detection_zone_body_entered"]
