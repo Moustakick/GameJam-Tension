@@ -75,4 +75,3 @@ scale = Vector2(2, 2)
 texture = ExtResource("6_rx04x")
 
 [connection signal="enemy_death" from="MenuEnemyLevel1" to="." method="_on_menu_enemy_level_1_enemy_death"]
-[connection signal="enemy_death" from="MenuEnemyLevel2" to="." method="_on_menu_enemy_level_2_enemy_death"]
