@@ -36,10 +36,6 @@ enum ShakeType {
 	Sway
 }
 
-@onready var random_shake = $ui/button_container/random_shake
-@onready var noise_shake = $ui/button_container/noise_shake
-@onready var noise_sway = $ui/button_container/noise_sway
-
 @onready var noise = FastNoiseLite.new()
 # Used to keep track of where we are in the noise
 # so that we can smoothly move through it

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dyar6qstwkxrj"]
+[gd_scene load_steps=16 format=3 uid="uid://loulseioox7d"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_qicq4"]
 [ext_resource type="Texture2D" uid="uid://3vytj2bntdp1" path="res://kenney_micro-roguelike/Tiles/NPC/npc1_move_2.png" id="2_4di1f"]
@@ -57,7 +57,7 @@ size = Vector2(8, 8)
 [sub_resource type="CircleShape2D" id="CircleShape2D_vt714"]
 radius = 44.4072
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="EnemyWoman" type="CharacterBody2D"]
 script = ExtResource("1_qicq4")
 
 [node name="EnemySprite" type="Sprite2D" parent="."]

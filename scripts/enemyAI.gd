@@ -3,7 +3,6 @@ extends Node2D
 @onready var enemy_detection_zone = $EnemyDetectionZone
 @onready var escape_timer = $EscapeTimer
 @onready var move_timer = $RandomMoveTimer
-@onready var animation_player = $AnimationEnemy
 
 # states
 enum State {
