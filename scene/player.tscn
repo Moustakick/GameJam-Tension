@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bbwjrdk3jdfry" path="res://scene/anchor_detector_2d.tscn" id="3_ucnoc"]
 [ext_resource type="Script" path="res://scripts/Hurtbox.gd" id="3_y64kw"]
 [ext_resource type="PackedScene" uid="uid://mu25lk7y00mv" path="res://scene/health_component.tscn" id="4_q6ny3"]
-[ext_resource type="Texture2D" uid="uid://22dha2qmtvwx" path="res://kenney_micro-roguelike/Tiles/NewTiles/player_move2.png" id="4_suyb2"]
-[ext_resource type="Texture2D" uid="uid://dsoqv4ttheae1" path="res://kenney_micro-roguelike/Tiles/NewTiles/player_idle2.png" id="7_i6g6x"]
-[ext_resource type="Texture2D" uid="uid://c6lslac43lrqq" path="res://kenney_micro-roguelike/Tiles/NewTiles/player_move1.png" id="9_wssq7"]
+[ext_resource type="Texture2D" uid="uid://dsoqv4ttheae1" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_idle2.png" id="7_f8dlc"]
+[ext_resource type="Texture2D" uid="uid://c6lslac43lrqq" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move1.png" id="8_k50qj"]
+[ext_resource type="Texture2D" uid="uid://22dha2qmtvwx" path="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move2.png" id="9_qlowl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8bn8g"]
 size = Vector2(6, 6)
@@ -31,7 +31,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("1_s8q7j"), ExtResource("7_i6g6x")]
+"values": [ExtResource("1_s8q7j"), ExtResource("7_f8dlc")]
 }
 
 [sub_resource type="Animation" id="Animation_u401k"]
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("9_wssq7"), ExtResource("4_suyb2")]
+"values": [ExtResource("8_k50qj"), ExtResource("9_qlowl")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2dfhq"]
@@ -75,7 +75,6 @@ shape = SubResource("RectangleShape2D_8bn8g")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_87raf")
-texture = ExtResource("4_suyb2")
 
 [node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsoqv4ttheae1"
-path="res://.godot/imported/player_idle2.png-cdf059df819db580308c84bc6dd80a6e.ctex"
+uid="uid://c6lslac43lrqq"
+path="res://.godot/imported/player_move1.png-591f9bb32e30e91572e3d815f64546e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://kenney_micro-roguelike/Tiles/NewTiles/player_idle2.png"
-dest_files=["res://.godot/imported/player_idle2.png-cdf059df819db580308c84bc6dd80a6e.ctex"]
+source_file="res://kenney_micro-roguelike/Tiles/PlayerMovement/player_move1.png"
+dest_files=["res://.godot/imported/player_move1.png-591f9bb32e30e91572e3d815f64546e5.ctex"]
 
 [params]
 
