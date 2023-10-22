@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://sa3nw0rnl70s"]
+[gd_scene load_steps=7 format=3 uid="uid://sa3nw0rnl70s"]
 
 [ext_resource type="PackedScene" uid="uid://hcok2ripdp8k" path="res://scene/levels/tile_map.tscn" id="1_ftcxs"]
+[ext_resource type="Script" path="res://scripts/level_template.gd" id="1_uicpb"]
 [ext_resource type="PackedScene" uid="uid://hag24t10sqiu" path="res://scene/anchor_2d.tscn" id="2_8b1a0"]
 [ext_resource type="PackedScene" uid="uid://dax2x8onk7n16" path="res://scene/player.tscn" id="3_fk47h"]
 [ext_resource type="PackedScene" uid="uid://xa0uvgcc2c32" path="res://scene/enemy.tscn" id="4_dr7hd"]
@@ -9,6 +10,7 @@
 size = Vector2(48, 40.5)
 
 [node name="level_template" type="Node2D"]
+script = ExtResource("1_uicpb")
 
 [node name="TileMap" parent="." instance=ExtResource("1_ftcxs")]
 position = Vector2(41, 40)

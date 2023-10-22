@@ -4,7 +4,7 @@ extends CharacterBody2D
 var FRICTION = 0.4
 var SPEED = 100.0
 var DASH_SPEED = 2000.0
-var TIMER = 10 #sec
+var TIMER = 3 #sec
 
 @onready var health = $HealthComponent as HealthComponent
 @onready var sword = preload("res://scene/sword.tscn")
@@ -96,10 +96,8 @@ func _input(event):
 		if is_sw_mouse and event.is_action_released("attack_mouse"):
 			sw.queue_free()
 			is_sw_mouse = false
-
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().quit()
+	
+	# dash
 	if event.is_action_pressed("dash"):
 		dash()
 
