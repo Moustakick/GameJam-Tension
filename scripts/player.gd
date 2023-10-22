@@ -21,6 +21,8 @@ var TIMER = 3 #sec
 @onready var gameover_label = $AnchorCamera2D/GameOverLabel
 @onready var victory_label = $AnchorCamera2D/VictoryLabel
 @onready var endtimer_label = $AnchorCamera2D/EndTimeLabel
+@onready var block_timer = $BlockTimer
+@onready var debut_sprite = $DebutSprite
 @onready var endcommand_label = $AnchorCamera2D/EndCommandLabel
 @onready var title_label = $AnchorCamera2D/Title_Label
 
@@ -35,7 +37,10 @@ var time_left = 0
 var dash_cpt = 1
 var is_safe = false
 var timer=0;
-var end=false
+var end = false
+var is_blocked = true
+var sin_amp = 0.4
+var sin_freq = 10
 
 func _ready():
 	gameover_label.visible=false
@@ -61,6 +66,8 @@ func _ready():
 		is_safe = true
 		timer_label.visible = false
 		title_label.visible=true
+	
+	block_timer.start()
 
 func get_movement_input():
 	var direction := Vector2(
@@ -103,6 +110,7 @@ func get_movement_input():
 		anchor_camera.detach_camera()
 		dash_label.visible = true
 		title_label.visible=false
+		debut_sprite.visible = false
 		
 		if !is_safe:
 			death_timer.start()
@@ -126,6 +134,9 @@ func dash():
 			dash_label.add_theme_color_override("font_color", Color(1,1,1))
 
 func _input(event):
+	if is_blocked:
+		return
+	
 	# attack with key board
 	if not is_sw_mouse:
 		if event.is_action_pressed("attack_key"):
@@ -151,6 +162,9 @@ func _input(event):
 		dash()
 
 func _physics_process(delta):
+	if is_blocked:
+		return
+	
 	timer+=delta
 	ennemy_group=get_tree().get_nodes_in_group("enemy")
 	get_movement_input()
@@ -177,6 +191,9 @@ func _physics_process(delta):
 		
 		var new_color = lerp(Color(0,0,0), Color(1,1,1), secs/TIMER)
 		timer_label.add_theme_color_override("font_color", new_color)
+	
+	if !first_movement and velocity == Vector2(0,0):
+		debut_sprite.move_local_x(sin_amp * sin(timer * sin_freq), true)
 
 func _on_hurtbox_body_entered(body):
 	print(1)
@@ -206,3 +223,7 @@ func enemy_died():
 		dash_label.add_theme_color_override("font_color", Color(1,1,1))
 	elif dash_cpt==3:
 		dash_label.add_theme_color_override("font_color", Color(1,0,0))
+
+func _on_block_timer_timeout():
+	print("coucou")
+	is_blocked = false
