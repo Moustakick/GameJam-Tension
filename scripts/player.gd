@@ -31,6 +31,7 @@ var sw
 var is_sw_key = false
 var is_sw_mouse = false
 var direction
+var last_direction = Vector2(0,0)
 var last_rotation = 0
 var first_movement = false
 var time_left = 0
@@ -70,7 +71,7 @@ func _ready():
 	block_timer.start()
 
 func get_movement_input():
-	var direction := Vector2(
+	var direction = Vector2(
 		# This first line calculates the X direction, the vector's first component.
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		# And here, we calculate the Y direction. Note that the Y-axis points 
@@ -92,6 +93,7 @@ func get_movement_input():
 		center_marker_key.rotation = 0
 		center_marker_key.rotate(direction.angle())
 		last_rotation = center_marker_key.rotation
+		last_direction = direction
 		animation_player.play("move")
 	
 	# update sword position key
@@ -117,7 +119,7 @@ func get_movement_input():
 		if !is_safe:
 			death_timer.start()
 
-func dash():
+func dash_mouse():
 	var global_pos = get_global_transform_with_canvas().get_origin()
 	var mouse_pos=get_viewport().get_mouse_position()
 	var mouse_direction= mouse_pos - global_pos
@@ -128,6 +130,16 @@ func dash():
 #		dash_trail.look_at(-mouse_direction)
 #		add_child(dash_trail)
 		velocity = Vector2(mouse_direction) * DASH_SPEED
+		dash_cpt -= 1
+		dash_label.text = "dash : %01d" % [dash_cpt]
+		if dash_cpt<1:
+			dash_label.add_theme_color_override("font_color", Color(1,0,0))
+		else:
+			dash_label.add_theme_color_override("font_color", Color(1,1,1))
+
+func dash_key():
+	if dash_cpt>0:
+		velocity = last_direction * DASH_SPEED
 		dash_cpt -= 1
 		dash_label.text = "dash : %01d" % [dash_cpt]
 		if dash_cpt<1:
@@ -160,8 +172,10 @@ func _input(event):
 			is_sw_mouse = false
 	
 	# dash
-	if event.is_action_pressed("dash"):
-		dash()
+	if event.is_action_pressed("dash_mouse"):
+		dash_mouse()
+	if event.is_action_pressed("dash_key"):
+		dash_key()
 
 func _physics_process(delta):
 	if is_blocked:

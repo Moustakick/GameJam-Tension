@@ -27,7 +27,7 @@ position = Vector2(1, 3)
 shape = SubResource("RectangleShape2D_o2v1o")
 
 [node name="Player" parent="." instance=ExtResource("4_33ac6")]
-position = Vector2(215, 142)
+position = Vector2(218, 143)
 
 [node name="EnemyDarkSorcerer3" parent="." instance=ExtResource("5_phfls")]
 position = Vector2(142, 151)
@@ -51,7 +51,7 @@ position = Vector2(138, 34)
 position = Vector2(49, 134)
 
 [node name="EnemyDarkSorcerer5" parent="." instance=ExtResource("5_phfls")]
-position = Vector2(193, 115)
+position = Vector2(173, 98)
 
 [node name="EnemyDarkSorcerer" parent="." instance=ExtResource("5_phfls")]
 position = Vector2(325, 138)
