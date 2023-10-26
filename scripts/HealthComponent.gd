@@ -32,7 +32,7 @@ func blood_spray():
 		camera.NOISE_SHAKE_STRENGTH = 40
 		camera.SHAKE_DECAY_RATE = 3
 		camera.apply_noise_shake()
-	var blood_instance = blood_particle.instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
+	var blood_instance = blood_particle.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	get_tree().current_scene.add_child(blood_instance)
 	blood_instance.global_position = global_position
 	var player = get_tree().get_nodes_in_group("player")[0]
